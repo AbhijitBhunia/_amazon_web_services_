@@ -1,0 +1,18 @@
+{
+"instance-id":"$detail.instance-id",
+"state":"$detail.state",
+"time":"$.time",
+"region":"$.region",
+"account":"$.account"
+}
+
+"At <time>, the status of your EC instance <instance-id> on account <account> in the AWS region <region> has changed to <state>"
+
+aws article for ec2 state change alarm:
+https://aws.amazon.com/premiumsupport/knowledge-center/ec2-email-instance-state-change/
+
+details about instance lifecycle:
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+
+creating aws cloudwatch event rule template for terraform:
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule
