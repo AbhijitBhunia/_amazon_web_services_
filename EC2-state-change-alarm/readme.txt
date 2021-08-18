@@ -13,3 +13,6 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/clou
 
 setup customized sns notification using sns and lambda:
 https://aws.amazon.com/premiumsupport/knowledge-center/sns-email-notifications-cloudwatch/
+
+lambda function reference:
+https://stackoverflow.com/questions/52194888/email-notification-through-sns-and-lambda

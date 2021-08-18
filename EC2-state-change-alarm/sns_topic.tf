@@ -1,5 +1,6 @@
 resource "aws_sns_topic" "ec2-instance-state-updates" {
   name            = "ec2-instance-state-change"
+  tags = module.global_account_settings.tags
   delivery_policy = <<EOF
 {
   "http": {
@@ -16,11 +17,6 @@ resource "aws_sns_topic" "ec2-instance-state-updates" {
   }
 }
 EOF
-  tags = {
-    "Name"   = "state-change-alarm"
-    "Source" = "Terraform"
-    "User"   = "Vijayrmourya"
-  }
   provisioner "local-exec" {
     command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.contact_person}"
   }

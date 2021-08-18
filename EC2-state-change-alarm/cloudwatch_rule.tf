@@ -1,6 +1,7 @@
 resource "aws_cloudwatch_event_rule" "instance-state-change-rule" {
   name        = "ec2-state-change-rule"
   description = "Capture any ec2 instance state change"
+  tags = module.global_account_settings.tags
 
   event_pattern = <<EOF
 {
@@ -19,11 +20,6 @@ resource "aws_cloudwatch_event_rule" "instance-state-change-rule" {
 }
 }
 EOF
-  tags = {
-    "Name"   = "state-change-alarm"
-    "Source" = "Terraform"
-    "User"   = "Vijayrmourya"
-  }
 }
 
 resource "aws_cloudwatch_event_target" "sns" {
@@ -31,16 +27,3 @@ resource "aws_cloudwatch_event_target" "sns" {
   target_id = "SendToSNS"
   arn       = aws_sns_topic.ec2-instance-state-updates.arn
 }
-
-//resource "aws_cloudwatch_event_target" "example" {
-//  arn  = aws_lambda_function.example.arn
-//  rule = aws_cloudwatch_event_rule.example.id
-//
-//  input_transformer {
-//    input_paths = {
-//      instance = "$.detail.instance",
-//      status   = "$.detail.status",
-//    }
-//    input_template = "\"<instance> is in state <status>\""
-//  }
-//}
