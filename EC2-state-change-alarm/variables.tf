@@ -11,3 +11,9 @@ variable "contact_person" {
   type        = string
   default     = "vijayrmourya@gmail.com"
 }
+
+variable "variant_name" {
+  description = "resolve naming conflict for different script"
+  type        = string
+  default     = "STATE-CHANGE"
+}
