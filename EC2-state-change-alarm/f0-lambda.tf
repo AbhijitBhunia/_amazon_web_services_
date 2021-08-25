@@ -1,16 +1,20 @@
 data "archive_file" "state_change_lambda_archive" {
-  type = "zip"
+  type        = "zip"
   output_path = "${path.module}/files/index.zip"
   source {
-    content = <<EOF
+    content  = <<EOF
 import boto3
 import json
 def lambda_handler(event, context):
     instance_id = event['detail']['instance-id']
+    M = 'Instance: '+instance_id+' has changed state\n'
     state = event['detail']["state"]
     time = event['time']
+    M = M+'State: '+state+' at '+time+'\n'
     region = event["region"]
+    M = M+'Region: '+region+'\n'
     resources = event["resources"][0]
+    M = M+'Resource ARN: '+resources
 
     #ec2 = boto3.client('ec2',"${var.aws_region}")
     #myinstance = ec2.describe_instances(InstanceIds=[instance_id])
@@ -21,7 +25,7 @@ def lambda_handler(event, context):
     sns_client.publish(
         TopicArn = MY_SNS_TOPIC_ARN,
         Subject = 'Instance Change State: '+instance_id,
-        Message = 'Instance: '+instance_id+' has changed state\n'+'State: '+state+' at '+time+'\n'+'Region: '+region+'\n'+'Resource ARN: '+resources
+        Message = M
     )
 EOF
     filename = "index.py"
@@ -48,7 +52,7 @@ resource "aws_iam_role" "state_change_lambda_role" {
 resource "aws_lambda_function" "state_change_lambda_function" {
   description      = "To customize the email details for EC2 instance state changes"
   filename         = data.archive_file.state_change_lambda_archive.output_path
-  function_name    = "EC2_state_change_lambda"
+  function_name    = "${var.variant_name}-EC2_state_change_lambda"
   role             = aws_iam_role.state_change_lambda_role.arn
   handler          = "index.lambda_handler"
   source_code_hash = data.archive_file.state_change_lambda_archive.output_base64sha256
