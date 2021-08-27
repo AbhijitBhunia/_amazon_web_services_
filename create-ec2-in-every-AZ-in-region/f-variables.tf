@@ -23,5 +23,5 @@ variable "instance_keypair" {
 variable "variant_name" {
   description = "resolve naming conflict for different script"
   type        = string
-  default     = "UTILITY-PROJECT"
+  default     = "all_az_ec2"
 }

@@ -15,5 +15,5 @@ variable "contact_person" {
 variable "variant_name" {
   description = "resolve naming conflict for different script"
   type        = string
-  default     = "STATE-CHANGE"
+  default     = "state_change"
 }
