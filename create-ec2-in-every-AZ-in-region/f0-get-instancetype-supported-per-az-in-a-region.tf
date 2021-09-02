@@ -1,5 +1,5 @@
 # Get List of Availability Zones in a Specific Region
-# Region is set in f-f-f-providers.tf in Provider Block
+# Region is set in f-f-f-f-f-providers.tf in Provider Block
 # Datasource-1
 data "aws_availability_zones" "my_a-zones" {
   filter {
