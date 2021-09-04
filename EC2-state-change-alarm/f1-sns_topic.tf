@@ -39,9 +39,3 @@ resource "aws_sns_topic_policy" "sns_topic_policy_attachment" {
   arn    = aws_sns_topic.ec2_state_change_sns.arn
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
-
-resource "aws_sns_topic_subscription" "user_updates_sns_target" {
-  topic_arn = aws_sns_topic.ec2_state_change_sns.arn
-  protocol  = "email"
-  endpoint  = var.contact_person
-}

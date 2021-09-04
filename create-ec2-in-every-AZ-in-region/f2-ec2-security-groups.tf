@@ -1,6 +1,6 @@
 # Create Security Group - SSH Traffic
-resource "aws_security_group" "vpc-ssh" {
-  name        = "${var.variant_name}-vpc-ssh"
+resource "aws_security_group" "vpc_ssh" {
+  name        = "vpc-ssh"
   description = "Security group for SSH traffic"
   tags        = module.global_account_settings.tags
   ingress {
@@ -11,7 +11,7 @@ resource "aws_security_group" "vpc-ssh" {
     cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
   }
   egress {
-    description = "Allow all ip and ports outbound"    
+    description = "Allow all ip and ports outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -20,8 +20,8 @@ resource "aws_security_group" "vpc-ssh" {
 }
 
 # Create Security Group - Web Traffic
-resource "aws_security_group" "vpc-web" {
-  name        = "${var.variant_name}-vpc-web"
+resource "aws_security_group" "vpc_web" {
+  name        = "vpc-web"
   description = "Security group for web traffic"
   tags        = module.global_account_settings.tags
   ingress {
@@ -37,9 +37,9 @@ resource "aws_security_group" "vpc-web" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
-  }  
+  }
   egress {
-    description = "Allow all ip and ports outbound"    
+    description = "Allow all ip and ports outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"

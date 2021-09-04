@@ -16,42 +16,42 @@ output "All_available_AZ_for_instance" {
 # EC2 Instance Public IP with TOSET
 output "instance-arn" {
   description = "EC2 Instance ARN"
-  value = toset([for instance in aws_instance.myec2vm: instance.arn])
+  value = toset([for instance in aws_instance.ec2_instances: instance.arn])
 }
 
 output "instance_public-ip" {
   description = "EC2 Instance Public IP"
-  value = toset([for instance in aws_instance.myec2vm: instance.public_ip])
+  value = toset([for instance in aws_instance.ec2_instances: instance.public_ip])
 }
 
 # EC2 Instance Public DNS with TOMAP
 output "instance_public-dns" {
-  value = tomap({for az, instance in aws_instance.myec2vm: az => instance.public_dns})
+  value = tomap({for az, instance in aws_instance.ec2_instances: az => instance.public_dns})
 }
 
 output "root-block-device" {
   description = "EC2 Instance Public IP"
-  value = toset([for instance in aws_instance.myec2vm: instance.root_block_device.0.volume_id])
+  value = toset([for instance in aws_instance.ec2_instances: instance.root_block_device.0.volume_id])
 }
 
 output "SSH-security-group-id" {
   description = "SSH security group arns"
-  value = aws_security_group.vpc-ssh.id
+  value = aws_security_group.vpc_ssh.id
 }
 
 output "SSH-security-group-arn" {
   description = "SSH security group arns"
-  value = aws_security_group.vpc-ssh.arn
+  value = aws_security_group.vpc_ssh.arn
 }
 
 output "web-security-group-id" {
   description = "SSH security group arns"
-  value = aws_security_group.vpc-web.id
+  value = aws_security_group.vpc_web.id
 }
 
 output "web-security-group-arn" {
   description = "SSH security group arns"
-  value = aws_security_group.vpc-web.arn
+  value = aws_security_group.vpc_web.arn
 }
 
 /*

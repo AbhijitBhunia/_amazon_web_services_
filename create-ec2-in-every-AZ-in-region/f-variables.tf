@@ -19,9 +19,3 @@ variable "instance_keypair" {
   type = string
   default = "EC2-Utility-Project-Key" # please create and save the keys with same name you create in AWS
 }
-
-variable "variant_name" {
-  description = "resolve naming conflict for different script"
-  type        = string
-  default     = "all_az_ec2"
-}
