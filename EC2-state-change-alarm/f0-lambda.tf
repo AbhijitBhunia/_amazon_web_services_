@@ -1,81 +1,104 @@
-data "archive_file" "state_change_lambda_archive" {
+data "archive_file" "lambda_archive" {
   type        = "zip"
   output_path = "${path.module}/files/index.zip"
   source {
     content  = <<EOF
 import boto3
-import json
+
+region = "${var.aws_region}"
 def lambda_handler(event, context):
     instance_id = event['detail']['instance-id']
-    M = 'Instance: '+instance_id+' has changed state\n'
     state = event['detail']["state"]
-    time = event['time']
-    M = M+'State: '+state+' at '+time+'\n'
     region = event["region"]
-    M = M+'Region: '+region+'\n'
-    resources = event["resources"][0]
-    M = M+'Resource ARN: '+resources
+    resources_ARN = event["resources"][0]
 
-    #ec2 = boto3.client('ec2',"${var.aws_region}")
-    #myinstance = ec2.describe_instances(InstanceIds=[instance_id])
-    #typedetails="Instance type: "myinstance[instance-type]+"\nInstance IP address: "+myinstance[ip-address]
+    ec2 = boto3.client('ec2', region)
+    myinstance = ec2.describe_instances(InstanceIds=[instance_id])
 
-    MY_SNS_TOPIC_ARN = "${aws_sns_topic.sns_simple_notification_topic.arn}"
-    sns_client = boto3.client('sns',"${var.aws_region}")
-    sns_client.publish(
-        TopicArn = MY_SNS_TOPIC_ARN,
-        Subject = 'Instance Change State: '+instance_id,
-        Message = M
-    )
+    AMI_ID = myinstance['Reservations'][0]['Instances'][0]['ImageId']
+    Instance_type = myinstance['Reservations'][0]['Instances'][0]['InstanceType']
+    tags = myinstance['Reservations'][0]['Instances'][0]['Tags']
+    TAG = ''
+    for i in tags:
+        TAG=TAG+str(i)+'\n'
+    MY_SNS_TOPIC_ARN = "${aws_sns_topic.ec2_state_change_sns.arn}"
+    sns_client = boto3.client('sns', region)
+    msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN + '\n' + 'Tag details: \n' + TAG
+
+    if (state == "running"):
+        sub = instance_id + ' : EC2 Instance State changed to Running'
+        sns_client.publish(
+            TopicArn = MY_SNS_TOPIC_ARN,
+            Subject = sub,
+            Message = msg
+        )
+    elif (state == "stopped"):
+        sub = instance_id + ' : EC2 Instance is stopped'
+        sns_client.publish(
+            TopicArn = MY_SNS_TOPIC_ARN,
+            Subject = sub,
+            Message = msg
+        )
+    elif (state == "terminated"):
+        sub = instance_id + ' : EC2 Instance is Terminated'
+        sns_client.publish(
+            TopicArn = MY_SNS_TOPIC_ARN,
+            Subject = sub,
+            Message = msg
+        )
+
 EOF
     filename = "index.py"
   }
 }
 
-resource "aws_iam_role" "state_change_lambda_role" {
-  name = "${var.variant_name}-lambda_sns_for_ec2_state_change"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        }
+resource "aws_iam_role" "lambda_role" {
+  name = "lambda_sns_for_ec2_state_change"
+  tags = module.global_account_settings.tags
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
       },
-    ]
-  })
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
 }
 
-resource "aws_lambda_function" "state_change_lambda_function" {
-  description      = "To customize the email details for EC2 instance state changes"
-  filename         = data.archive_file.state_change_lambda_archive.output_path
-  function_name    = "${var.variant_name}-EC2_state_change_lambda"
-  role             = aws_iam_role.state_change_lambda_role.arn
+resource "aws_lambda_function" "ec2_state_change_lambda_function" {
+  description      = "lambda to customize the email details for EC2 instance state changes"
+  filename         = data.archive_file.lambda_archive.output_path
+  function_name    = "ec2_state_change_lambda"
+  role             = aws_iam_role.lambda_role.arn
   handler          = "index.lambda_handler"
-  source_code_hash = data.archive_file.state_change_lambda_archive.output_base64sha256
+  source_code_hash = data.archive_file.lambda_archive.output_base64sha256
   runtime          = "python3.8"
+  tags = module.global_account_settings.tags
 }
 
-resource "aws_lambda_alias" "lambda_state_change_alias" {
-  name             = "${var.variant_name}-my_alias"
+resource "aws_lambda_alias" "state_change_lambda_alias" {
+  name             = "state_change_lambda_alias"
   description      = "lambda alias"
-  function_name    = aws_lambda_function.state_change_lambda_function.arn
+  function_name    = aws_lambda_function.ec2_state_change_lambda_function.arn
   function_version = "$LATEST"
 }
 
 resource "aws_lambda_permission" "lambda_cloudwatch_trigger_permission" {
   statement_id  = "AllowExecutionFromCloudwatch"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.state_change_lambda_function.arn
+  function_name = aws_lambda_function.ec2_state_change_lambda_function.arn
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cloudwatch_simple_event_rule.arn
 }
 
 resource "aws_iam_policy" "lambda_role_policy" {
-  name   = "${var.variant_name}-LambdaRolePolicy"
+  name   = "state_change_Lambda_Role_Policy"
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -123,5 +146,6 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "lambda_role_policy_attachment" {
   policy_arn = aws_iam_policy.lambda_role_policy.arn
-  role       = aws_iam_role.state_change_lambda_role.name
+  role       = aws_iam_role.lambda_role.name
 }
+

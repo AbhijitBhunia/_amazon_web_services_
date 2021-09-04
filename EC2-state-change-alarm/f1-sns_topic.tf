@@ -1,5 +1,5 @@
-resource "aws_sns_topic" "sns_simple_notification_topic" {
-  name            = "${var.variant_name}-simple-SNS-notify"
+resource "aws_sns_topic" "ec2_state_change_sns" {
+  name            = "state_change_sns_notify"
   tags            = module.global_account_settings.tags
   delivery_policy = <<EOF
 {
@@ -31,17 +31,17 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       type        = "Service"
       identifiers = ["events.amazonaws.com"]
     }
-    resources = [aws_sns_topic.sns_simple_notification_topic.arn]
+    resources = [aws_sns_topic.ec2_state_change_sns.arn]
   }
 }
 
-resource "aws_sns_topic_policy" "sns_default" {
-  arn    = aws_sns_topic.sns_simple_notification_topic.arn
+resource "aws_sns_topic_policy" "sns_topic_policy_attachment" {
+  arn    = aws_sns_topic.ec2_state_change_sns.arn
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
 
-resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
-  topic_arn = aws_sns_topic.sns_simple_notification_topic.arn
+resource "aws_sns_topic_subscription" "user_updates_sns_target" {
+  topic_arn = aws_sns_topic.ec2_state_change_sns.arn
   protocol  = "email"
   endpoint  = var.contact_person
 }

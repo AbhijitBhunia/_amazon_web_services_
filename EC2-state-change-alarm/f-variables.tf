@@ -12,8 +12,3 @@ variable "contact_person" {
   default     = "vijayrmourya@gmail.com"
 }
 
-variable "variant_name" {
-  description = "resolve naming conflict for different script"
-  type        = string
-  default     = "state_change"
-}

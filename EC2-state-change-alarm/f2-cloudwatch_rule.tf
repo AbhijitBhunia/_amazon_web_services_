@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "cloudwatch_simple_event_rule" {
-  name        = "${var.variant_name}-ec2-state-change-rule"
+  name        = "ec2-state-change-rule"
   description = "Capture any ec2 instance state change"
   tags        = module.global_account_settings.tags
 
@@ -25,5 +25,5 @@ EOF
 resource "aws_cloudwatch_event_target" "target_lambda" {
   rule      = aws_cloudwatch_event_rule.cloudwatch_simple_event_rule.name
   target_id = "SendToLambda"
-  arn       = aws_lambda_function.state_change_lambda_function.arn
+  arn       = aws_lambda_function.ec2_state_change_lambda_function.arn
 }
