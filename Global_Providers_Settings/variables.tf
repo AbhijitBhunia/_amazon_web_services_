@@ -11,4 +11,3 @@ variable "contact_person" {
   type        = string
   default     = "vijayrmourya@gmail.com"
 }
-

@@ -8,3 +8,8 @@ terraform {
     }
   }
 }
+
+provider "aws" {
+  profile = "vijay_mk0"
+  region  = var.aws_region
+}

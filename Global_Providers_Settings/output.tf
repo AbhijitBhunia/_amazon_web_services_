@@ -1,7 +1,7 @@
 output "tags" {
   value = {
     "Source" = "Terraform"
-    "User"   = "Vijayrmourya"
+    "name"   = "Vijayrmourya"
     "resource_purpose" = "practice_resource"
   }
 }
