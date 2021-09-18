@@ -1,3 +1,4 @@
+
 data "archive_file" "lambda_archive" {
   type        = "zip"
   output_path = "${path.module}/files/index.zip"
