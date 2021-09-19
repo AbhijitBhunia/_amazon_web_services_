@@ -1,6 +1,6 @@
 import boto3
 
-region = "ap-south-1"
+region = "${var.aws_region}"
 def lambda_handler(event, context):
     instance_id = event['detail']['instance-id']
     state = event['detail']["state"]
@@ -24,7 +24,7 @@ def lambda_handler(event, context):
             TAG = TAG + i[j] + ' '
         TAG = TAG+'\n'
 
-    MY_SNS_TOPIC_ARN = "arn:aws:sns:ap-south-1:064558089886:state_change_sns_notify"
+    MY_SNS_TOPIC_ARN = "${aws_sns_topic.ec2_state_change_sns.arn}"
     sns_client = boto3.client('sns', region)
     msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN + '\n' + 'Tag details as mentioned below: \n' + TAG
 
