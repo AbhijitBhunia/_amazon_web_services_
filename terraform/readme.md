@@ -13,3 +13,4 @@ please refere project descreption below or project related readme file in each p
 
 ## EC2-state-change-alarm
 - To send an email to the subscriber(Account owner) whenever an EC2 instance is created and deleted (any state change) based on configuration.
+

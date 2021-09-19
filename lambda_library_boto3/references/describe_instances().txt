@@ -1,0 +1,842 @@
+https://boto3.amazonaws.com/v1/documentation/api/1.9.42/reference/services/ec2.html#EC2.Client.describe_instances
+
+Parameters
+Filters (list) --
+One or more filters.
+
+affinity - The affinity setting for an instance running on a Dedicated Host (default | host ).
+architecture - The instance architecture (i386 | x86_64 ).
+availability-zone - The Availability Zone of the instance.
+block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z .
+block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.
+block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh ).
+block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached ).
+block-device-mapping.volume-id - The volume ID of the EBS volume.
+client-token - The idempotency token you provided when you launched the instance.
+dns-name - The public DNS name of the instance.
+group-id - The ID of the security group for the instance. EC2-Classic only.
+group-name - The name of the security group for the instance. EC2-Classic only.
+host-id - The ID of the Dedicated Host on which the instance is running, if applicable.
+hypervisor - The hypervisor type of the instance (ovm | xen ).
+iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.
+image-id - The ID of the image used to launch the instance.
+instance-id - The ID of the instance.
+instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled ).
+instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
+instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped ).
+instance-type - The type of instance (for example, t2.micro ).
+instance.group-id - The ID of the security group for the instance.
+instance.group-name - The name of the security group for the instance.
+ip-address - The public IPv4 address of the instance.
+kernel-id - The kernel ID.
+key-name - The name of the key pair used when the instance was launched.
+launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).
+launch-time - The time when the instance was launched.
+monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled ).
+network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.
+network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.
+network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.
+network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.
+network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.
+network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.
+network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.
+network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.
+network-interface.attachment.attachment-id - The ID of the interface attachment.
+network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.
+network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.
+network-interface.attachment.device-index - The device index to which the network interface is attached.
+network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached ).
+network-interface.attachment.attach-time - The time that the network interface was attached to an instance.
+network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.
+network-interface.availability-zone - The Availability Zone for the network interface.
+network-interface.description - The description of the network interface.
+network-interface.group-id - The ID of a security group associated with the network interface.
+network-interface.group-name - The name of a security group associated with the network interface.
+network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.
+network-interface.mac-address - The MAC address of the network interface.
+network-interface.network-interface-id - The ID of the network interface.
+network-interface.owner-id - The ID of the owner of the network interface.
+network-interface.private-dns-name - The private DNS name of the network interface.
+network-interface.requester-id - The requester ID for the network interface.
+network-interface.requester-managed - Indicates whether the network interface is being managed by AWS.
+network-interface.status - The status of the network interface (available ) | in-use ).
+network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.
+network-interface.subnet-id - The ID of the subnet for the network interface.
+network-interface.vpc-id - The ID of the VPC for the network interface.
+owner-id - The AWS account ID of the instance owner.
+placement-group-name - The name of the placement group for the instance.
+platform - The platform. Use windows if you have Windows instances; otherwise, leave blank.
+private-dns-name - The private IPv4 DNS name of the instance.
+private-ip-address - The private IPv4 address of the instance.
+product-code - The product code associated with the AMI used to launch the instance.
+product-code.type - The type of product code (devpay | marketplace ).
+ramdisk-id - The RAM disk ID.
+reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.
+requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).
+reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.
+root-device-name - The device name of the root device volume (for example, /dev/sda1 ).
+root-device-type - The type of the root device volume (ebs | instance-store ).
+source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.
+spot-instance-request-id - The ID of the Spot Instance request.
+state-reason-code - The reason code for the state change.
+state-reason-message - A message that describes the state change.
+subnet-id - The ID of the subnet for the instance.
+tag :<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA , specify tag:Owner for the filter name and TeamA for the filter value.
+tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.
+tenancy - The tenancy of an instance (dedicated | default | host ).
+virtualization-type - The virtualization type of the instance (paravirtual | hvm ).
+vpc-id - The ID of the VPC that the instance is running in.
+(dict) --
+A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a describe operation are documented with the describe operation. For example:
+
+DescribeAvailabilityZones
+DescribeImages
+DescribeInstances
+DescribeKeyPairs
+DescribeSecurityGroups
+DescribeSnapshots
+DescribeSubnets
+DescribeTags
+DescribeVolumes
+DescribeVpcs
+Name (string) --
+The name of the filter. Filter names are case-sensitive.
+
+Values (list) --
+One or more filter values. Filter values are case-sensitive.
+
+(string) --
+InstanceIds (list) --
+One or more instance IDs.
+
+Default: Describes all your instances.
+
+(string) --
+DryRun (boolean) -- Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation . Otherwise, it is UnauthorizedOperation .
+MaxResults (integer) -- The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+NextToken (string) -- The token to request the next page of results.
+Return type
+dict
+
+Returns
+Response Syntax
+
+{
+    'Reservations': [
+        {
+            'Groups': [
+                {
+                    'GroupName': 'string',
+                    'GroupId': 'string'
+                },
+            ],
+            'Instances': [
+                {
+                    'AmiLaunchIndex': 123,
+                    'ImageId': 'string',
+                    'InstanceId': 'string',
+                    'InstanceType': 't1.micro'|'t2.nano'|'t2.micro'|'t2.small'|'t2.medium'|'t2.large'|'t2.xlarge'|'t2.2xlarge'|'t3.nano'|'t3.micro'|'t3.small'|'t3.medium'|'t3.large'|'t3.xlarge'|'t3.2xlarge'|'m1.small'|'m1.medium'|'m1.large'|'m1.xlarge'|'m3.medium'|'m3.large'|'m3.xlarge'|'m3.2xlarge'|'m4.large'|'m4.xlarge'|'m4.2xlarge'|'m4.4xlarge'|'m4.10xlarge'|'m4.16xlarge'|'m2.xlarge'|'m2.2xlarge'|'m2.4xlarge'|'cr1.8xlarge'|'r3.large'|'r3.xlarge'|'r3.2xlarge'|'r3.4xlarge'|'r3.8xlarge'|'r4.large'|'r4.xlarge'|'r4.2xlarge'|'r4.4xlarge'|'r4.8xlarge'|'r4.16xlarge'|'r5.large'|'r5.xlarge'|'r5.2xlarge'|'r5.4xlarge'|'r5.8xlarge'|'r5.12xlarge'|'r5.16xlarge'|'r5.24xlarge'|'r5.metal'|'r5a.large'|'r5a.xlarge'|'r5a.2xlarge'|'r5a.4xlarge'|'r5a.12xlarge'|'r5a.24xlarge'|'r5d.large'|'r5d.xlarge'|'r5d.2xlarge'|'r5d.4xlarge'|'r5d.8xlarge'|'r5d.12xlarge'|'r5d.16xlarge'|'r5d.24xlarge'|'r5d.metal'|'x1.16xlarge'|'x1.32xlarge'|'x1e.xlarge'|'x1e.2xlarge'|'x1e.4xlarge'|'x1e.8xlarge'|'x1e.16xlarge'|'x1e.32xlarge'|'i2.xlarge'|'i2.2xlarge'|'i2.4xlarge'|'i2.8xlarge'|'i3.large'|'i3.xlarge'|'i3.2xlarge'|'i3.4xlarge'|'i3.8xlarge'|'i3.16xlarge'|'i3.metal'|'hi1.4xlarge'|'hs1.8xlarge'|'c1.medium'|'c1.xlarge'|'c3.large'|'c3.xlarge'|'c3.2xlarge'|'c3.4xlarge'|'c3.8xlarge'|'c4.large'|'c4.xlarge'|'c4.2xlarge'|'c4.4xlarge'|'c4.8xlarge'|'c5.large'|'c5.xlarge'|'c5.2xlarge'|'c5.4xlarge'|'c5.9xlarge'|'c5.18xlarge'|'c5d.large'|'c5d.xlarge'|'c5d.2xlarge'|'c5d.4xlarge'|'c5d.9xlarge'|'c5d.18xlarge'|'cc1.4xlarge'|'cc2.8xlarge'|'g2.2xlarge'|'g2.8xlarge'|'g3.4xlarge'|'g3.8xlarge'|'g3.16xlarge'|'g3s.xlarge'|'cg1.4xlarge'|'p2.xlarge'|'p2.8xlarge'|'p2.16xlarge'|'p3.2xlarge'|'p3.8xlarge'|'p3.16xlarge'|'d2.xlarge'|'d2.2xlarge'|'d2.4xlarge'|'d2.8xlarge'|'f1.2xlarge'|'f1.4xlarge'|'f1.16xlarge'|'m5.large'|'m5.xlarge'|'m5.2xlarge'|'m5.4xlarge'|'m5.12xlarge'|'m5.24xlarge'|'m5a.large'|'m5a.xlarge'|'m5a.2xlarge'|'m5a.4xlarge'|'m5a.12xlarge'|'m5a.24xlarge'|'m5d.large'|'m5d.xlarge'|'m5d.2xlarge'|'m5d.4xlarge'|'m5d.12xlarge'|'m5d.24xlarge'|'h1.2xlarge'|'h1.4xlarge'|'h1.8xlarge'|'h1.16xlarge'|'z1d.large'|'z1d.xlarge'|'z1d.2xlarge'|'z1d.3xlarge'|'z1d.6xlarge'|'z1d.12xlarge'|'u-6tb1.metal'|'u-9tb1.metal'|'u-12tb1.metal',
+                    'KernelId': 'string',
+                    'KeyName': 'string',
+                    'LaunchTime': datetime(2015, 1, 1),
+                    'Monitoring': {
+                        'State': 'disabled'|'disabling'|'enabled'|'pending'
+                    },
+                    'Placement': {
+                        'AvailabilityZone': 'string',
+                        'Affinity': 'string',
+                        'GroupName': 'string',
+                        'HostId': 'string',
+                        'Tenancy': 'default'|'dedicated'|'host',
+                        'SpreadDomain': 'string'
+                    },
+                    'Platform': 'Windows',
+                    'PrivateDnsName': 'string',
+                    'PrivateIpAddress': 'string',
+                    'ProductCodes': [
+                        {
+                            'ProductCodeId': 'string',
+                            'ProductCodeType': 'devpay'|'marketplace'
+                        },
+                    ],
+                    'PublicDnsName': 'string',
+                    'PublicIpAddress': 'string',
+                    'RamdiskId': 'string',
+                    'State': {
+                        'Code': 123,
+                        'Name': 'pending'|'running'|'shutting-down'|'terminated'|'stopping'|'stopped'
+                    },
+                    'StateTransitionReason': 'string',
+                    'SubnetId': 'string',
+                    'VpcId': 'string',
+                    'Architecture': 'i386'|'x86_64',
+                    'BlockDeviceMappings': [
+                        {
+                            'DeviceName': 'string',
+                            'Ebs': {
+                                'AttachTime': datetime(2015, 1, 1),
+                                'DeleteOnTermination': True|False,
+                                'Status': 'attaching'|'attached'|'detaching'|'detached',
+                                'VolumeId': 'string'
+                            }
+                        },
+                    ],
+                    'ClientToken': 'string',
+                    'EbsOptimized': True|False,
+                    'EnaSupport': True|False,
+                    'Hypervisor': 'ovm'|'xen',
+                    'IamInstanceProfile': {
+                        'Arn': 'string',
+                        'Id': 'string'
+                    },
+                    'InstanceLifecycle': 'spot'|'scheduled',
+                    'ElasticGpuAssociations': [
+                        {
+                            'ElasticGpuId': 'string',
+                            'ElasticGpuAssociationId': 'string',
+                            'ElasticGpuAssociationState': 'string',
+                            'ElasticGpuAssociationTime': 'string'
+                        },
+                    ],
+                    'NetworkInterfaces': [
+                        {
+                            'Association': {
+                                'IpOwnerId': 'string',
+                                'PublicDnsName': 'string',
+                                'PublicIp': 'string'
+                            },
+                            'Attachment': {
+                                'AttachTime': datetime(2015, 1, 1),
+                                'AttachmentId': 'string',
+                                'DeleteOnTermination': True|False,
+                                'DeviceIndex': 123,
+                                'Status': 'attaching'|'attached'|'detaching'|'detached'
+                            },
+                            'Description': 'string',
+                            'Groups': [
+                                {
+                                    'GroupName': 'string',
+                                    'GroupId': 'string'
+                                },
+                            ],
+                            'Ipv6Addresses': [
+                                {
+                                    'Ipv6Address': 'string'
+                                },
+                            ],
+                            'MacAddress': 'string',
+                            'NetworkInterfaceId': 'string',
+                            'OwnerId': 'string',
+                            'PrivateDnsName': 'string',
+                            'PrivateIpAddress': 'string',
+                            'PrivateIpAddresses': [
+                                {
+                                    'Association': {
+                                        'IpOwnerId': 'string',
+                                        'PublicDnsName': 'string',
+                                        'PublicIp': 'string'
+                                    },
+                                    'Primary': True|False,
+                                    'PrivateDnsName': 'string',
+                                    'PrivateIpAddress': 'string'
+                                },
+                            ],
+                            'SourceDestCheck': True|False,
+                            'Status': 'available'|'associated'|'attaching'|'in-use'|'detaching',
+                            'SubnetId': 'string',
+                            'VpcId': 'string'
+                        },
+                    ],
+                    'RootDeviceName': 'string',
+                    'RootDeviceType': 'ebs'|'instance-store',
+                    'SecurityGroups': [
+                        {
+                            'GroupName': 'string',
+                            'GroupId': 'string'
+                        },
+                    ],
+                    'SourceDestCheck': True|False,
+                    'SpotInstanceRequestId': 'string',
+                    'SriovNetSupport': 'string',
+                    'StateReason': {
+                        'Code': 'string',
+                        'Message': 'string'
+                    },
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ],
+                    'VirtualizationType': 'hvm'|'paravirtual',
+                    'CpuOptions': {
+                        'CoreCount': 123,
+                        'ThreadsPerCore': 123
+                    },
+                    'CapacityReservationId': 'string',
+                    'CapacityReservationSpecification': {
+                        'CapacityReservationPreference': 'open'|'none',
+                        'CapacityReservationTarget': {
+                            'CapacityReservationId': 'string'
+                        }
+                    }
+                },
+            ],
+            'OwnerId': 'string',
+            'RequesterId': 'string',
+            'ReservationId': 'string'
+        },
+    ],
+    'NextToken': 'string'
+}
+
+Response Structure
+
+(dict) --
+
+Contains the output of DescribeInstances.
+
+Reservations (list) --
+
+Zero or more reservations.
+
+(dict) --
+
+Describes a reservation.
+
+Groups (list) --
+
+[EC2-Classic only] One or more security groups.
+
+(dict) --
+
+Describes a security group.
+
+GroupName (string) --
+
+The name of the security group.
+
+GroupId (string) --
+
+The ID of the security group.
+
+Instances (list) --
+
+One or more instances.
+
+(dict) --
+
+Describes an instance.
+
+AmiLaunchIndex (integer) --
+
+The AMI launch index, which can be used to find this instance in the launch group.
+
+ImageId (string) --
+
+The ID of the AMI used to launch the instance.
+
+InstanceId (string) --
+
+The ID of the instance.
+
+InstanceType (string) --
+
+The instance type.
+
+KernelId (string) --
+
+The kernel associated with this instance, if applicable.
+
+KeyName (string) --
+
+The name of the key pair, if this instance was launched with an associated key pair.
+
+LaunchTime (datetime) --
+
+The time the instance was launched.
+
+Monitoring (dict) --
+
+The monitoring for the instance.
+
+State (string) --
+
+Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
+
+Placement (dict) --
+
+The location where the instance launched, if applicable.
+
+AvailabilityZone (string) --
+
+The Availability Zone of the instance.
+
+Affinity (string) --
+
+The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the ImportInstance command.
+
+GroupName (string) --
+
+The name of the placement group the instance is in.
+
+HostId (string) --
+
+The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the ImportInstance command.
+
+Tenancy (string) --
+
+The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command.
+
+SpreadDomain (string) --
+
+Reserved for future use.
+
+Platform (string) --
+
+The value is Windows for Windows instances; otherwise blank.
+
+PrivateDnsName (string) --
+
+(IPv4 only) The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the running state.
+
+[EC2-VPC] The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.
+
+PrivateIpAddress (string) --
+
+The private IPv4 address assigned to the instance.
+
+ProductCodes (list) --
+
+The product codes attached to this instance, if applicable.
+
+(dict) --
+
+Describes a product code.
+
+ProductCodeId (string) --
+
+The product code.
+
+ProductCodeType (string) --
+
+The type of product code.
+
+PublicDnsName (string) --
+
+(IPv4 only) The public DNS name assigned to the instance. This name is not available until the instance enters the running state. For EC2-VPC, this name is only available if you've enabled DNS hostnames for your VPC.
+
+PublicIpAddress (string) --
+
+The public IPv4 address assigned to the instance, if applicable.
+
+RamdiskId (string) --
+
+The RAM disk associated with this instance, if applicable.
+
+State (dict) --
+
+The current state of the instance.
+
+Code (integer) --
+
+The low byte represents the state. The high byte is used for internal purposes and should be ignored.
+
+0 : pending
+16 : running
+32 : shutting-down
+48 : terminated
+64 : stopping
+80 : stopped
+Name (string) --
+
+The current state of the instance.
+
+StateTransitionReason (string) --
+
+The reason for the most recent state transition. This might be an empty string.
+
+SubnetId (string) --
+
+[EC2-VPC] The ID of the subnet in which the instance is running.
+
+VpcId (string) --
+
+[EC2-VPC] The ID of the VPC in which the instance is running.
+
+Architecture (string) --
+
+The architecture of the image.
+
+BlockDeviceMappings (list) --
+
+Any block device mapping entries for the instance.
+
+(dict) --
+
+Describes a block device mapping.
+
+DeviceName (string) --
+
+The device name (for example, /dev/sdh or xvdh ).
+
+Ebs (dict) --
+
+Parameters used to automatically set up EBS volumes when the instance is launched.
+
+AttachTime (datetime) --
+
+The time stamp when the attachment initiated.
+
+DeleteOnTermination (boolean) --
+
+Indicates whether the volume is deleted on instance termination.
+
+Status (string) --
+
+The attachment state.
+
+VolumeId (string) --
+
+The ID of the EBS volume.
+
+ClientToken (string) --
+
+The idempotency token you provided when you launched the instance, if applicable.
+
+EbsOptimized (boolean) --
+
+Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.
+
+EnaSupport (boolean) --
+
+Specifies whether enhanced networking with ENA is enabled.
+
+Hypervisor (string) --
+
+The hypervisor type of the instance.
+
+IamInstanceProfile (dict) --
+
+The IAM instance profile associated with the instance, if applicable.
+
+Arn (string) --
+
+The Amazon Resource Name (ARN) of the instance profile.
+
+Id (string) --
+
+The ID of the instance profile.
+
+InstanceLifecycle (string) --
+
+Indicates whether this is a Spot Instance or a Scheduled Instance.
+
+ElasticGpuAssociations (list) --
+
+The Elastic GPU associated with the instance.
+
+(dict) --
+
+Describes the association between an instance and an Elastic GPU.
+
+ElasticGpuId (string) --
+
+The ID of the Elastic GPU.
+
+ElasticGpuAssociationId (string) --
+
+The ID of the association.
+
+ElasticGpuAssociationState (string) --
+
+The state of the association between the instance and the Elastic GPU.
+
+ElasticGpuAssociationTime (string) --
+
+The time the Elastic GPU was associated with the instance.
+
+NetworkInterfaces (list) --
+
+[EC2-VPC] One or more network interfaces for the instance.
+
+(dict) --
+
+Describes a network interface.
+
+Association (dict) --
+
+The association information for an Elastic IPv4 associated with the network interface.
+
+IpOwnerId (string) --
+
+The ID of the owner of the Elastic IP address.
+
+PublicDnsName (string) --
+
+The public DNS name.
+
+PublicIp (string) --
+
+The public IP address or Elastic IP address bound to the network interface.
+
+Attachment (dict) --
+
+The network interface attachment.
+
+AttachTime (datetime) --
+
+The time stamp when the attachment initiated.
+
+AttachmentId (string) --
+
+The ID of the network interface attachment.
+
+DeleteOnTermination (boolean) --
+
+Indicates whether the network interface is deleted when the instance is terminated.
+
+DeviceIndex (integer) --
+
+The index of the device on the instance for the network interface attachment.
+
+Status (string) --
+
+The attachment state.
+
+Description (string) --
+
+The description.
+
+Groups (list) --
+
+One or more security groups.
+
+(dict) --
+
+Describes a security group.
+
+GroupName (string) --
+
+The name of the security group.
+
+GroupId (string) --
+
+The ID of the security group.
+
+Ipv6Addresses (list) --
+
+One or more IPv6 addresses associated with the network interface.
+
+(dict) --
+
+Describes an IPv6 address.
+
+Ipv6Address (string) --
+
+The IPv6 address.
+
+MacAddress (string) --
+
+The MAC address.
+
+NetworkInterfaceId (string) --
+
+The ID of the network interface.
+
+OwnerId (string) --
+
+The ID of the AWS account that created the network interface.
+
+PrivateDnsName (string) --
+
+The private DNS name.
+
+PrivateIpAddress (string) --
+
+The IPv4 address of the network interface within the subnet.
+
+PrivateIpAddresses (list) --
+
+One or more private IPv4 addresses associated with the network interface.
+
+(dict) --
+
+Describes a private IPv4 address.
+
+Association (dict) --
+
+The association information for an Elastic IP address for the network interface.
+
+IpOwnerId (string) --
+
+The ID of the owner of the Elastic IP address.
+
+PublicDnsName (string) --
+
+The public DNS name.
+
+PublicIp (string) --
+
+The public IP address or Elastic IP address bound to the network interface.
+
+Primary (boolean) --
+
+Indicates whether this IPv4 address is the primary private IP address of the network interface.
+
+PrivateDnsName (string) --
+
+The private IPv4 DNS name.
+
+PrivateIpAddress (string) --
+
+The private IPv4 address of the network interface.
+
+SourceDestCheck (boolean) --
+
+Indicates whether to validate network traffic to or from this network interface.
+
+Status (string) --
+
+The status of the network interface.
+
+SubnetId (string) --
+
+The ID of the subnet.
+
+VpcId (string) --
+
+The ID of the VPC.
+
+RootDeviceName (string) --
+
+The device name of the root device volume (for example, /dev/sda1 ).
+
+RootDeviceType (string) --
+
+The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.
+
+SecurityGroups (list) --
+
+One or more security groups for the instance.
+
+(dict) --
+
+Describes a security group.
+
+GroupName (string) --
+
+The name of the security group.
+
+GroupId (string) --
+
+The ID of the security group.
+
+SourceDestCheck (boolean) --
+
+Specifies whether to enable an instance launched in a VPC to perform NAT. This controls whether source/destination checking is enabled on the instance. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform NAT. For more information, see NAT Instances in the Amazon Virtual Private Cloud User Guide .
+
+SpotInstanceRequestId (string) --
+
+If the request is a Spot Instance request, the ID of the request.
+
+SriovNetSupport (string) --
+
+Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.
+
+StateReason (dict) --
+
+The reason for the most recent state transition.
+
+Code (string) --
+
+The reason code for the state change.
+
+Message (string) --
+
+The message for the state change.
+
+Server.InsufficientInstanceCapacity : There was insufficient capacity available to satisfy the launch request.
+Server.InternalError : An internal error caused the instance to terminate during launch.
+Server.ScheduledStop : The instance was stopped due to a scheduled retirement.
+Server.SpotInstanceShutdown : The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.
+Server.SpotInstanceTermination : The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.
+Client.InstanceInitiatedShutdown : The instance was shut down using the shutdown -h command from the instance.
+Client.InstanceTerminated : The instance was terminated or rebooted during AMI creation.
+Client.InternalError : A client error caused the instance to terminate during launch.
+Client.InvalidSnapshot.NotFound : The specified snapshot was not found.
+Client.UserInitiatedShutdown : The instance was shut down using the Amazon EC2 API.
+Client.VolumeLimitExceeded : The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.
+Tags (list) --
+
+Any tags assigned to the instance.
+
+(dict) --
+
+Describes a tag.
+
+Key (string) --
+
+The key of the tag.
+
+Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws: .
+
+Value (string) --
+
+The value of the tag.
+
+Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+
+VirtualizationType (string) --
+
+The virtualization type of the instance.
+
+CpuOptions (dict) --
+
+The CPU options for the instance.
+
+CoreCount (integer) --
+
+The number of CPU cores for the instance.
+
+ThreadsPerCore (integer) --
+
+The number of threads per CPU core.
+
+CapacityReservationId (string) --
+
+The ID of the Capacity Reservation.
+
+CapacityReservationSpecification (dict) --
+
+Information about the Capacity Reservation targeting option.
+
+CapacityReservationPreference (string) --
+
+Describes the instance's Capacity Reservation preferences. Possible preferences include:
+
+open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).
+none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.
+CapacityReservationTarget (dict) --
+
+Information about the targeted Capacity Reservation.
+
+CapacityReservationId (string) --
+
+The ID of the Capacity Reservation.
+
+OwnerId (string) --
+
+The ID of the AWS account that owns the reservation.
+
+RequesterId (string) --
+
+The ID of the requester that launched the instances on your behalf (for example, AWS Management Console or Auto Scaling).
+
+ReservationId (string) --
+
+The ID of the reservation.
+
+NextToken (string) --
+
+The token to use to retrieve the next page of results. This value is null when there are no more results to return.
