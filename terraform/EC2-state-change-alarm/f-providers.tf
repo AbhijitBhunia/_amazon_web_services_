@@ -4,6 +4,6 @@ module "global_account_settings" {
 
 # Provider Block
 provider "aws" {
-  profile = "Terraform_User"
+  profile = "vijay_aws_"
   region  = var.aws_region
 }

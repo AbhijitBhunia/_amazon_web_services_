@@ -1,4 +1,3 @@
-
 data "archive_file" "lambda_archive" {
   type        = "zip"
   output_path = "${path.module}/files/index.zip"
@@ -6,7 +5,7 @@ data "archive_file" "lambda_archive" {
     content  = <<EOF
 import boto3
 
-region = "${var.aws_region}"
+region = "ap-south-1"
 def lambda_handler(event, context):
     instance_id = event['detail']['instance-id']
     state = event['detail']["state"]
@@ -19,29 +18,37 @@ def lambda_handler(event, context):
     AMI_ID = myinstance['Reservations'][0]['Instances'][0]['ImageId']
     Instance_type = myinstance['Reservations'][0]['Instances'][0]['InstanceType']
     tags = myinstance['Reservations'][0]['Instances'][0]['Tags']
+    instance_name='No name tagged'
+
     TAG = ''
     for i in tags:
-        TAG=TAG+str(i)+'\n'
-    MY_SNS_TOPIC_ARN = "${aws_sns_topic.ec2_state_change_sns.arn}"
+        k=list(i.keys())
+        for j in k:
+            if str(i[j])=='name':
+                name = 'Tagged '+ i[j] +" : "+i['Value']
+            TAG = TAG + i[j] + ' '
+        TAG = TAG+'\n'
+
+    MY_SNS_TOPIC_ARN = "arn:aws:sns:ap-south-1:064558089886:state_change_sns_notify"
     sns_client = boto3.client('sns', region)
-    msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN + '\n' + 'Tag details: \n' + TAG
+    msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN + '\n' + 'Tag details as mentioned below: \n' + TAG
 
     if (state == "running"):
-        sub = instance_id + ' : EC2 Instance State changed to Running'
+        sub = 'EC2 Instance State changed to Running (' + name + ')'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,
             Message = msg
         )
     elif (state == "stopped"):
-        sub = instance_id + ' : EC2 Instance is stopped'
+        sub = 'EC2 Instance is stopped (' + name + ')'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,
             Message = msg
         )
     elif (state == "terminated"):
-        sub = instance_id + ' : EC2 Instance is Terminated'
+        sub = 'EC2 Instance is Terminated (' + name + ')'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,
@@ -81,13 +88,6 @@ resource "aws_lambda_function" "ec2_state_change_lambda_function" {
   source_code_hash = data.archive_file.lambda_archive.output_base64sha256
   runtime          = "python3.8"
   tags = module.global_account_settings.tags
-}
-
-resource "aws_lambda_alias" "state_change_lambda_alias" {
-  name             = "state_change_lambda_alias"
-  description      = "lambda alias"
-  function_name    = aws_lambda_function.ec2_state_change_lambda_function.arn
-  function_version = "$LATEST"
 }
 
 resource "aws_lambda_permission" "lambda_cloudwatch_trigger_permission" {
