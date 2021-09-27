@@ -1,0 +1,8 @@
+1: FTP on linux EC2
+https://medium.com/tensult/configure-ftp-on-aws-ec2-85b5b56b9c94
+
+2: FTP on Windows EC2
+https://cloudinfrastructureservices.co.uk/how-to-setup-ftp-server-on-amazon-aws-windows-ec2-instance/
+
+3:
+
