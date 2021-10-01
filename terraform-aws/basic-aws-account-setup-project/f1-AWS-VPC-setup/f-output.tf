@@ -5,7 +5,3 @@ output "VPC_ARN" {
 output "VPC_ID" {
   value = aws_vpc.main.id
 }
-
-output "VPC-CIDR" {
-  value = aws_vpc.main.cidr_block
-}
