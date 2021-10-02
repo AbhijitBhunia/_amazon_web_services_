@@ -1,5 +1,5 @@
 .idea/
-
+*.hcl
 ---------------------------------------------
 # Local .terraform directories
 **/.terraform/*
