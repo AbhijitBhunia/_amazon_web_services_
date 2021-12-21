@@ -12,8 +12,5 @@ please refere project descreption below or project related readme file in each p
 ## lambda-aws-boto3
 - AWS Boto3 lambdas to do multiple tasks using AWS lambda
 
-## lambda-terraform-boto3
-- AWS lambdas to do multiple tasks using AWS Terraform provider. lambdas are made the way it will work easily with terraform scripts
-
 ## terraform-aws
 - terraform based projects for AWS
