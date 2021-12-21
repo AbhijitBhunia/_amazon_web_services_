@@ -2,9 +2,11 @@
 terraform projects for AWS
 
 ## Project list:
-- create-ec2-in-every-AZ-in-region
-- EC2-state-change-alarm
 - basic-aws-account-setup-project
+- create-ec2-in-every-AZ-in-region
+- create-ec2-spot-instance-request
+- create-windows-ec2-instance
+- EC2-state-change-alarm
 - send-cloudwatch-logs-to-elasticsearch-via-lambda
 ***
 please refere project descreption below or project related readme file in each project folder.
