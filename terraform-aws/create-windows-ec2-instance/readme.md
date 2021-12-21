@@ -2,7 +2,7 @@
 ***
 <b> To create EC2 instances as a windows instance type.</b>
 
-- <b>app1-install.sh :</b>
+- <b>f0-instance.tf :</b>
   the EC2 instance resource definition for a Windows instance creation.
 
 ***
