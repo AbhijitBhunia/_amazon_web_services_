@@ -2,8 +2,8 @@ resource "aws_internet_gateway" "simple-gateway" {
   vpc_id = module.vpc_settings.VPC_ID
 
   tags = merge(
-    module.project_provider_settings.tags,
-    var.IGW-tags
+  module.project_provider_settings.tags,
+  var.IGW-tags
   )
 }
 

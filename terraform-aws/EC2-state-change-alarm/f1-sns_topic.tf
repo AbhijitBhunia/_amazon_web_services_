@@ -41,7 +41,7 @@ resource "aws_sns_topic_policy" "sns_topic_policy_attachment" {
 }
 
 resource "aws_sns_topic_subscription" "sns_subscription" {
-  endpoint = var.contact_person
-  protocol = "email"
+  endpoint  = var.contact_person
+  protocol  = "email"
   topic_arn = aws_sns_topic.ec2_state_change_sns.arn
 }

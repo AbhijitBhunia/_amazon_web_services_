@@ -9,19 +9,19 @@ variable "aws_region" {
 # AWS EC2 Instance Type
 variable "instance_type" {
   description = "EC2 Instnace Type"
-  type = string
-  default = "t3.medium"
+  type        = string
+  default     = "t3.medium"
 }
 
 # AWS EC2 Instance Key Pair
 variable "instance_keypair" {
   description = "AWS EC2 Key Pair that need to be associated with EC2 Instance"
-  type = string
-  default = "windows-key" # please create and save the keys with same name you create in AWS
+  type        = string
+  default     = "windows-key" # please create and save the keys with same name you create in AWS
 }
 
 variable "additional_tags" {
-  default     = {
+  default = {
     Name = "My-Shell-instance"
   }
 }

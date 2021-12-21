@@ -8,18 +8,18 @@ variable "aws_region" {
 
 /*Subnet parameters*/
 variable "private-subnet-CIDRs" {
-  type = list(string)
-  default = ["172.0.0.0/18","172.0.128.0/18"]
+  type    = list(string)
+  default = ["172.0.0.0/18", "172.0.128.0/18"]
 }
 
 variable "public-subnet-CIDRs" {
-  type = list(string)
-  default = ["172.0.64.0/18","172.0.192.0/18"]
+  type    = list(string)
+  default = ["172.0.64.0/18", "172.0.192.0/18"]
 }
 
 variable "Availability_Zones" {
-  type = list(string)
-  default = ["ap-south-1a","ap-south-1b"]
+  type    = list(string)
+  default = ["ap-south-1a", "ap-south-1b"]
 }
 
 //Name tags

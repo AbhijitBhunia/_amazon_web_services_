@@ -61,8 +61,8 @@ EOF
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_sns_for_ec2_state_change"
-  tags = module.global_account_settings.tags
+  name               = "lambda_sns_for_ec2_state_change"
+  tags               = module.global_account_settings.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -87,7 +87,7 @@ resource "aws_lambda_function" "ec2_state_change_lambda_function" {
   handler          = "index.lambda_handler"
   source_code_hash = data.archive_file.lambda_archive.output_base64sha256
   runtime          = "python3.8"
-  tags = module.global_account_settings.tags
+  tags             = module.global_account_settings.tags
 }
 
 resource "aws_lambda_permission" "lambda_cloudwatch_trigger_permission" {

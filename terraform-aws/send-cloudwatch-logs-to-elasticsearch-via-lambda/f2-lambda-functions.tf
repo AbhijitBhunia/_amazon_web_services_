@@ -1,6 +1,6 @@
 resource "aws_iam_role" "lambda_role" {
   name               = "lambda_for_sending_logs_to_ES"
-  tags            = module.global_account_settings.tags
+  tags               = module.global_account_settings.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

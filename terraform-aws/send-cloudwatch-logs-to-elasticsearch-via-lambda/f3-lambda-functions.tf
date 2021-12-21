@@ -30,13 +30,13 @@ resource "aws_lambda_function" "lambda_function_one" {
 //*********************************************************************************
 
 resource "aws_iam_role" "state_change_lambda_role" {
-  name = "lambda-to-create-logs"
+  name               = "lambda-to-create-logs"
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
+        Action    = "sts:AssumeRole"
+        Effect    = "Allow"
         Principal = {
           Service = "lambda.amazonaws.com"
         }
