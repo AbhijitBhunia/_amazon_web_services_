@@ -2,7 +2,7 @@
 resource "aws_instance" "ec2_instances" {
   ami                    = data.aws_ami.amzlinux2.id
   instance_type          = var.instance_type
-  user_data              = file("${path.module}/app1-install.sh")
+  user_data              = file("${path.module}/f-app1-install.sh")
   key_name               = aws_key_pair.ec2-key-pair.key_name
   vpc_security_group_ids = [aws_security_group.vpc_ssh.id, aws_security_group.vpc_web.id]
   # Create EC2 Instance in all Availabilty Zones of a VPC
