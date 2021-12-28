@@ -7,7 +7,7 @@ resource "aws_instance" "ec2_instances" {
   vpc_security_group_ids = [aws_security_group.vpc_ssh.id, aws_security_group.vpc_web.id]
   # Create EC2 Instance in all Availabilty Zones of a VPC
   for_each               = toset(keys({
-  for az, details in data.aws_ec2_instance_type_offerings.my_ins_type :
+  for az, details in data.aws_ec2_instance_type_offerings.instance-type-list :
   az => details.instance_types if length(details.instance_types) != 0
   }))
   availability_zone      = each.key # You can also use each.value because for list items each.key == each.value

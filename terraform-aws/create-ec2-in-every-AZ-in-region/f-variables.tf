@@ -17,5 +17,5 @@ variable "instance_type" {
 variable "instance_keypair" {
   description = "AWS EC2 Key Pair that need to be associated with EC2 Instance"
   type        = string
-  default     = "EC2-Utility-Project-Key" # please create and save the keys with same name you create in AWS
+  default     = "create-ec2-in-every-AZ-in-region-Key" # please create and save the keys with same name you create in AWS
 }
