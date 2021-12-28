@@ -4,6 +4,5 @@ module "global_account_settings" {
 
 # Provider Block
 provider "aws" {
-  profile = "vijay_aws_"
   region  = var.aws_region
 }
