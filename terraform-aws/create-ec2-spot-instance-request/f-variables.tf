@@ -17,7 +17,7 @@ variable "instance_type" {
 variable "instance_keypair" {
   description = "AWS EC2 Key Pair that need to be associated with EC2 Instance"
   type        = string
-  default     = "spot-instance-key" # please create and save the keys with same name you create in AWS
+  default     = "create-ec2-spot-instance-request-key" # please create and save the keys with same name you create in AWS
 }
 
 variable "additional_tags" {
