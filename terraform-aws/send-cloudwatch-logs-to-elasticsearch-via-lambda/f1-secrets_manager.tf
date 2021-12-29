@@ -6,6 +6,7 @@ resource "aws_secretsmanager_secret" "elasticsearch-credentials" {
   tags                    = module.global_account_settings.tags
 }
 
+#use of CLI is recommended to store any credentials
 resource "aws_secretsmanager_secret_version" "sversion" {
   secret_id     = aws_secretsmanager_secret.elasticsearch-credentials.id
   secret_string = <<EOF
