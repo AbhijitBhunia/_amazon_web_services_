@@ -1,6 +1,7 @@
 .idea/
 *.hcl
 .terraform*
+private-key
 ---------------------------------------------
 # Local .terraform directories
 **/.terraform/*
