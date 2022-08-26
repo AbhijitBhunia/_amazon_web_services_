@@ -1,20 +1,14 @@
 # About repository
 
-This project contains all my aws, terraform and boto3 lambda based projects.
+This repository is collection of all of my work on AWS, using AWS colsole/CLI, AWS cloudformation, AWS Boto3, AWS with Terraform, AWS CDK
+I have worked on AWS cloud as a DevOps engineer having experience on various AWS services ex. cloudformation, EC2, S3, Lambda etc.
 
-## Project list:
+---
+My AWS experience: EC2, S3, CloudFormation, SNS, SQS, IAM, Lambda
 
-- lambda-aws-boto3
-- terraform-aws
+---
 
-***
-please refer project description below or project related readme file in each project folder.
-***
+### Folders description:
 
-## lambda-aws-boto3
-
-- AWS Boto3 lambdas to do multiple tasks using AWS lambda (ex. Create/delete resources)
-
-## terraform-aws
-
-- terraform based projects for AWS (ex. Create/delete resources)
+- aws-CLI: contains my work with AWS CLI
+- terraform-aws: contains my work with aws and terraform
