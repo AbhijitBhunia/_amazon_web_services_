@@ -9,6 +9,7 @@ resource "aws_key_pair" "ec2-key-pair" {
 }
 
 resource "local_file" "private_key" {
-  content  = tls_private_key.tls-key.private_key_pem
-  filename = "${path.module}/private-key/create_ec2_in_every_AZ_in_region_key.pem"
+  content         = tls_private_key.tls-key.private_key_pem
+  filename        = "${path.module}/private-key/create_ec2_in_every_AZ_in_region_key.pem"
+  file_permission = "0600"
 }

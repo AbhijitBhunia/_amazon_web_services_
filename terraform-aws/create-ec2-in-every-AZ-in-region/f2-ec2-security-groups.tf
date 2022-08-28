@@ -8,14 +8,14 @@ resource "aws_security_group" "vpc_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"] /*just for practice purpose*/
   }
   egress {
     description = "Allow all ip and ports outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
+    cidr_blocks = ["0.0.0.0/0"]  /*just for practice purpose*/
   }
 }
 
@@ -29,21 +29,21 @@ resource "aws_security_group" "vpc_web" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"] /*just for practice purpose*/
   }
   ingress {
     description = "Allow Port 443"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"] /*just for practice purpose*/
   }
   egress {
     description = "Allow all ip and ports outbound"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
+    cidr_blocks = ["0.0.0.0/0"]  /*just for practice purpose*/
   }
 }
 
