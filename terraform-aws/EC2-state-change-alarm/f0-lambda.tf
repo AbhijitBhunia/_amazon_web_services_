@@ -17,39 +17,27 @@ def lambda_handler(event, context):
 
     AMI_ID = myinstance['Reservations'][0]['Instances'][0]['ImageId']
     Instance_type = myinstance['Reservations'][0]['Instances'][0]['InstanceType']
-    tags = myinstance['Reservations'][0]['Instances'][0]['Tags']
-    instance_name='No name tagged'
-    name = ""
-
-    TAG = ''
-    for i in tags:
-        k=list(i.keys())
-        for j in k:
-            if str(i[j])=='name' or str(i[j])=='Name' or str(i[j])=='NAME':
-                name = 'Tagged '+ i[j] +" : "+i['Value']
-            TAG = TAG + i[j] + ' '
-        TAG = TAG+'\n'
 
     MY_SNS_TOPIC_ARN = "${aws_sns_topic.ec2_state_change_sns.arn}"
     sns_client = boto3.client('sns', region)
-    msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN + '\n' + 'Tag details as mentioned below: \n' + TAG
+    msg = 'Instance ID:   ' + instance_id + '\n' + 'State:   ' + state + '\n' + 'Region:   ' + region + '\n' + 'Instance AMI ID:   ' + AMI_ID + '\n' + 'Instance type:   ' + Instance_type + '\n' + 'Instance ARN:   ' + resources_ARN
 
     if (state == "running"):
-        sub = 'EC2 Instance (' + instance_id + ') State changed to Running (' + name + ')'
+        sub = 'EC2 Instance (' + instance_id + ') State changed to Running'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,
             Message = msg
         )
     elif (state == "stopped"):
-        sub = 'EC2 Instance (' + instance_id + ') State changed to Stopped (' + name + ')'
+        sub = 'EC2 Instance (' + instance_id + ') State changed to Stopped'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,
             Message = msg
         )
     elif (state == "terminated"):
-        sub = 'EC2 Instance (' + instance_id + ') State changed to Terminated (' + name + ')'
+        sub = 'EC2 Instance (' + instance_id + ') State changed to Terminated'
         sns_client.publish(
             TopicArn = MY_SNS_TOPIC_ARN,
             Subject = sub,

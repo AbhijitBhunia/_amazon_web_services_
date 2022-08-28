@@ -12,3 +12,7 @@ variable "contact_person" {
   default     = "vijayrmourya@gmail.com"
 }
 
+variable "aws_user_profile" {
+  type    = string
+  default = "vjmourya1"
+}
