@@ -2,6 +2,7 @@
 *.hcl
 .terraform*
 private-key
+*output.txt*
 ---------------------------------------------
 # Local .terraform directories
 **/.terraform/*

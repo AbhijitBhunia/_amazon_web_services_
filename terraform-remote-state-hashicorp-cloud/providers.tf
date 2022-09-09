@@ -16,14 +16,8 @@ terraform {
 
 # Provider Block
 provider "aws" {
-  #  profile                  = var.aws_user_profile
   shared_config_files      = ["C:\\Users\\Administrator\\.aws\\config"]
   shared_credentials_files = ["C:\\Users\\Administrator\\.aws\\credentials"]
   region                   = var.aws_region
   #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
-}
-
-resource "aws_s3_bucket" "s3_Bucket0" {
-  bucket        = "testbucketvjmourya"
-  force_destroy = true
 }
