@@ -1,8 +1,7 @@
 module "global_account_settings" {
-  source = "../Global_Providers_Settings"
+  source = "../tf-Global_Providers_Settings"
 }
 
-# Provider Block
 provider "aws" {
   profile = var.aws_user_profile
   region  = var.aws_region

@@ -1,5 +1,5 @@
 module "global_account_settings" {
-  source = "../Global_Providers_Settings"
+  source = "../tf-Global_Providers_Settings"
 }
 
 # Provider Block
