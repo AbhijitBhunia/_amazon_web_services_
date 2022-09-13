@@ -6,17 +6,16 @@ terraform {
       version = "~> 4.0"
     }
   }
+  backend "remote" {
+    organization = "vjmouryaStateStore"
+    workspaces {
+      name = "aws-tf-base-setup"
+    }
+  }
 }
 
 # Provider Block
 provider "aws" {
-  #  profile = var.aws_user_profile
-  region                   = var.aws_region
-  shared_credentials_files = ["C:\\Users\\Administrator\\.aws\\credentials"]
+  region = var.aws_region
   #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
-  assume_role {
-    role_arn = "arn:aws:iam::418887156176:role/sts-assumerole-tf"
-    #    external_id  = "justassumedrole"
-    session_name = "terraform_session"
-  }
 }
