@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "s3_backend" {
-  bucket        = var.bucket_name
+  bucket        = module.variables.global_state_bucket_name
   force_destroy = true
   tags = {
     resourcepurpose = "backend_state_bucket"

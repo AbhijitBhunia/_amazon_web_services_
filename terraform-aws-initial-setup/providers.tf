@@ -16,6 +16,6 @@ terraform {
 
 # Provider Block
 provider "aws" {
-  region = var.aws_region
+  region = module.variables.global_profile
   #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 }
