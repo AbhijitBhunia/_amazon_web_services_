@@ -1,4 +1,5 @@
 Write-Host "terraform init" -ForegroundColor Green
+terraform get
 terraform init
 
 Write-Host "terraform fmt" -ForegroundColor Blue

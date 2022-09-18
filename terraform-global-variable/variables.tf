@@ -1,4 +1,4 @@
-output "aws_region" {
+output "global_region" {
   description = "Region in which AWS Resources to be created"
   value     = "ap-south-1"
 }

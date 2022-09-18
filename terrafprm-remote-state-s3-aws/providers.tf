@@ -10,8 +10,8 @@ terraform {
 
 # Provider Block
 provider "aws" {
-  #  profile = var.aws_user_profile
-  region                   = var.aws_region
+  profile                  = var.aws_user_profile
+  region                   = module.variables.global_region
   shared_credentials_files = ["C:\\Users\\Administrator\\.aws\\credentials"]
   #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
   assume_role {
@@ -19,4 +19,8 @@ provider "aws" {
     #    external_id  = "justassumedrole"
     session_name = "terraform_session"
   }
+}
+
+module "variables" {
+  source = "../terraform-global-variable"
 }

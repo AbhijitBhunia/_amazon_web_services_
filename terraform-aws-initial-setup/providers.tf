@@ -6,16 +6,14 @@ terraform {
       version = "~> 4.0"
     }
   }
-  backend "remote" {
-    organization = "vjmouryaStateStore"
-    workspaces {
-      name = "aws-tf-base-setup"
-    }
+  backend "local" {
+    path = "./state-store/terraform.tfstate"
   }
 }
 
 # Provider Block
 provider "aws" {
-  region = module.variables.global_profile
+  region  = module.variables.global_region
+  profile = module.variables.global_profile
   #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 }
