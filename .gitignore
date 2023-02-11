@@ -4,6 +4,8 @@
 private-key
 *output.txt*
 .terraform.lock.hcl
+logs/
+output.txt
 ---------------------------------------------
 # Local .terraform directories
 **/.terraform/*
@@ -39,3 +41,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+unprovisioned/
+.idea/*
+.pem
+admin_iam_and_repositories/

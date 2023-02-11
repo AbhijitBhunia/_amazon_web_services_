@@ -17,7 +17,7 @@ resource "aws_security_group" "Windows_server_vpc_web" {
     cidr_blocks = ["0.0.0.0/0"] /*just for practice purpose*/
   }
   tags = merge({
-    "project" = "WindowsServerTCSProject1"
+    "project" = "WindowsServerProject1"
     },
     module.global_account_settings.tags
   )

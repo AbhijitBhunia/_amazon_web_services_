@@ -1,12 +1,17 @@
-function prev_command_exit_status($status)
+function setup_log_trace()
+{
+    $Env:TF_LOG = "TRACE"
+}
+
+function prev_command_exit_status($status, $command)
 {
     if ($status -eq 0)
     {
-        Write-Output "Command executed successfully"
+        Write-Host "terraform $command : executed successfully" -ForegroundColor Green
     }
     else
     {
-        Write-Output "Last command failed"
+        Write-Host "terraform $command : FAILED" -ForegroundColor Red
         exit 0
     }
 }
@@ -14,24 +19,24 @@ function prev_command_exit_status($status)
 function initialize_terraform()
 {
     Write-Host "Initializing Terraform: >terraform init" -ForegroundColor Green
-    terraform get
-    prev_command_exit_status $LASTEXITCODE
-    terraform init
-    prev_command_exit_status $LASTEXITCODE
+    terraform get -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/get_log.txt"
+    prev_command_exit_status $LASTEXITCODE "get"
+    terraform init -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/init_log.txt"
+    prev_command_exit_status $LASTEXITCODE "init"
 }
 
 function format_tf_config_files()
 {
     Write-Host "Formatting the files: >terraform fmt" -ForegroundColor Blue
-    terraform fmt
-    prev_command_exit_status $LASTEXITCODE
+    terraform fmt -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/fmt_log.txt"
+    prev_command_exit_status $LASTEXITCODE "fmt"
 }
 
 function validate_the_tf_configs()
 {
     Write-Host "Validating the TF config: >terraform validate" -ForegroundColor Blue
-    terraform validate
-    prev_command_exit_status $LASTEXITCODE
+    terraform validate -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/validate_log.txt"
+    prev_command_exit_status $LASTEXITCODE "validate"
 }
 
 function destroy_old_provisioned_resources()
@@ -41,8 +46,8 @@ function destroy_old_provisioned_resources()
     if ($destroy -eq 'Y')
     {
         Write-Host "terraform destroying all old resources please wait" -ForegroundColor Red
-        terraform destroy -auto-approve #-lock=false # need to remove -lock=false
-        prev_command_exit_status $LASTEXITCODE
+        terraform destroy -auto-approve -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/destroy_log.txt" #-lock=false # need to remove -lock=false
+        prev_command_exit_status $LASTEXITCODE "destroy"
     }
     else
     {
@@ -53,8 +58,8 @@ function destroy_old_provisioned_resources()
 function plan_infra()
 {
     Write-Host "Showing the plan for configurations: >terraform plan" -ForegroundColor Green
-    terraform plan -lock=false # need to remove -lock=false
-    prev_command_exit_status $LASTEXITCODE
+    terraform plan -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/plan_log.txt"# need to remove -lock=false
+    prev_command_exit_status $LASTEXITCODE "plan"
 }
 
 function create_infra()
@@ -63,11 +68,11 @@ function create_infra()
     if ($planapply -eq 'Y')
     {
         Write-Host "terraform Apply running: >terraform apply -auto-approve" -ForegroundColor Green
-        terraform apply -auto-approve #-lock=false
-        prev_command_exit_status $LASTEXITCODE
+        terraform apply -auto-approve -no-color 2>&1 | Tee-Object -FilePath "$PWD/logs/apply_log.txt"#-lock=false
+        prev_command_exit_status $LASTEXITCODE "apply"
         Write-Host "Saving output: >terraform output > output.txt" -ForegroundColor Green
         terraform output > output.txt
-        prev_command_exit_status $LASTEXITCODE
+        prev_command_exit_status $LASTEXITCODE "output > output.txt"
     }
     else
     {
@@ -77,6 +82,9 @@ function create_infra()
 
 function exec_main()
 {
+    mkdir -p "$PWD/logs"
+    Write-Host "SETTING LOG TRACE" -ForegroundColor Green
+    setup_log_trace
     Write-Host "####-----TERRAFORM STARTING ALL PROCESSSES-----####" -ForegroundColor Green
     initialize_terraform
     format_tf_config_files

@@ -1,12 +1,17 @@
-function prev_command_exit_status($status)
+function setup_log_trace()
+{
+    $Env:TF_LOG = "TRACE"
+}
+
+function prev_command_exit_status($status, $command)
 {
     if ($status -eq 0)
     {
-        Write-Output "Command executed successfully"
+        Write-Host "terraform $command : executed successfully" -ForegroundColor Green
     }
     else
     {
-        Write-Output "Last command failed"
+        Write-Host "terraform $command : FAILED" -ForegroundColor Red
         exit 0
     }
 }
@@ -18,8 +23,9 @@ function destroy_all_provisioned_resources()
     if ($destroy -eq 'Y')
     {
         Write-Host "terraform destroying all old resources please wait" -ForegroundColor Red
-        terraform destroy -auto-approve #-lock=false # need to remove -lock=false
-        prev_command_exit_status $LASTEXITCODE
+        setup_log_trace
+        terraform destroy -auto-approve -no-color 2>&1 | Tee-Object -FilePath "$PWD/destroy_log.txt" #-lock=false # need to remove -lock=false
+        prev_command_exit_status $LASTEXITCODE "destroy"
     }
     else
     {
@@ -31,11 +37,14 @@ function display_infra()
 {
     Write-Host "Showing all provisioned resources: >terraform show" -ForegroundColor Yellow
     terraform show
-    prev_command_exit_status $LASTEXITCODE
+    prev_command_exit_status $LASTEXITCODE "show"
 }
 
 function exec_main()
 {
+    mkdir -p "$PWD/logs"
+    Write-Host "SETTING LOG TRACE" -ForegroundColor Green
+    setup_log_trace
     Write-Host "####-----TERRAFORM STARTING ALL PROCESSSES-----####" -ForegroundColor Green
     display_infra
     destroy_all_provisioned_resources
