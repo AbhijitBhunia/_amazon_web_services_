@@ -8,7 +8,7 @@ output "contact_person" {
 
 output "default_instance_type" {
   description = "EC2 Instnace Type"
-  value       = "t2.micro"
+  value       = "t3.medium"
 }
 
 output "default_UBUNTU_AMI_ID" {

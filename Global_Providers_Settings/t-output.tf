@@ -1,6 +1,6 @@
 output "tags" {
   value = {
-    "source"  = "Terraform"
+    "source"           = "Terraform"
     "creator_name"     = "vijay mourya"
     "resource_purpose" = "practice_resource"
   }
