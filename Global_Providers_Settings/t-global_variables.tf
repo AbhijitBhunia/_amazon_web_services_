@@ -22,3 +22,13 @@ output "default_WINDOWS_AMI_ID" {
 output "PERSONAL_SERVER_IP" {
   value = data.http.myip.response_body
 }
+
+output "aws_default_region" {
+  description = "Region in which AWS Resources to be created"
+  value       = "ap-south-1"
+  #  https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+}
+
+output "aws_user_profile" {
+  value = "for_aws_3"
+}
